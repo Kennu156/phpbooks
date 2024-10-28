@@ -5,10 +5,10 @@ require_once('./connection.php');
 $id = $_GET['id'];
 
 if ( isset($_POST['action']) && $_POST['action'] == 'Salvesta' ){
-    $stmt = $pdo->prepare('UPDATE books SET title, price = :price WHERE id = :id');
+    $stmt = $pdo->prepare('UPDATE books SET title =:title, price = :price WHERE id = :id');
     $stmt->execute(['id' => $id, 'title' => $_POST['title'] ]);
 
-    header("Location: ./book.php?id={ $id }");
+    header("Location: ./book.php?id={$id}");
 }
 
 $stmt = $pdo->prepare('SELECT * FROM books WHERE id = :id');
