@@ -8,9 +8,9 @@ $stmt = $pdo->prepare('SELECT * FROM books WHERE id = :id');
 $stmt->execute(['id' => $id]);
 $book = $stmt->fetch();
 
-// $stmt = $pdo->prepare('SELECT * FROM book_authors ba LEFT JOIN authors a ON ba.authors_id=a.id WHERE ba.book.id = :id');
-// $stmt->execute(['id' => $id]);
 
+$stmt = $pdo->prepare('SELECT * FROM book_authors ba LEFT JOIN authors a ON ba.author_id=a.id WHERE ba.book_id = :id');
+$stmt->execute(['id' => $id]);
 
 
 ?>
