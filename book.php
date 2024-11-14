@@ -30,15 +30,18 @@ $stmt->execute(['id' => $id]);
 
             <li>
                 <?= $author['first_name']; ?>
+                <?= $author['last_name']; ?>
             </li>
         
         <?php } ?>
     </ul>
 
+
+    <p>Kokkuvõte: <?=$book['summary'] ?></p>
     <p>Hind: <?= round($book['price'], 2);?> &euro;</p>
 
     <a href="./edit.php?id=<?= $id ?>">Muuda</a>
-
+    <br><br>
     <form action="./delete.php" method="post">
         <input type="hidden" name="id" value="<?= $id ?>">
         <input type="submit" name="action" value="Kustuta">
