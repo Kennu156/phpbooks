@@ -15,6 +15,11 @@ $stmt = $pdo->query('SELECT * FROM books WHERE is_deleted = 0');
 </head>
 <body>
 
+<form method="post" action="./search.php">
+    <input type="text" name="search" placeholder="Search for student">
+    <input type="submit" value="Otsi">
+</form>
+
 <ul>
     <?php while ( $book = $stmt->fetch() ) { ?>
         

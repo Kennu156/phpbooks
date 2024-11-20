@@ -1,7 +1,7 @@
 <?php
 
 
-if ( isset($_POST['action']) && $_POST['action'] == 'remove_auhtor' ) {
+if ( isset($_POST['action']) && $_POST['action'] == 'remove_author' ) {
     
     require_once('./connection.php');
 

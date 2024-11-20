@@ -24,6 +24,10 @@ $stmt->execute(['id' => $id]);
 </head>
 <body>
 
+    <nav>
+        <a href="./index.php?id=<?= $id; ?>">Tagasi</a>
+    </nav>
+
 <h1>Pealkiri: <?= $book['title']?></h1>
     <ul>
         <?php while ( $author = $stmt->fetch() ) { ?>
@@ -38,7 +42,7 @@ $stmt->execute(['id' => $id]);
 
 
     <p>Kokkuvõte: <?=$book['summary'] ?></p>
-    <p>Hind: <?= round($book['price'], 2);?> &euro;</p>
+    <p>Hind: <?= number_format($book['price'], 2);?> &euro;</p>
 
     <a href="./edit.php?id=<?= $id ?>">Muuda</a>
     <br><br>
