@@ -29,6 +29,7 @@ $stmt->execute(['id' => $id]);
     </nav>
 
 <h1>Pealkiri: <?= $book['title']?></h1>
+<img src="<?=$book['cover_path']?>" alt="">
     <ul>
         <?php while ( $author = $stmt->fetch() ) { ?>
 
