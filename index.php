@@ -2,7 +2,15 @@
 
 require_once('./connection.php');
 
-$stmt = $pdo->query('SELECT * FROM books WHERE is_deleted = 0');
+$search = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search'])) {
+    $search = $_POST['search'];
+    $stmt = $pdo->prepare('SELECT * FROM books WHERE is_deleted = 0 AND title LIKE :search');
+    $stmt->execute(['search' => '%' . $search . '%']);
+} else {
+    $stmt = $pdo->query('SELECT * FROM books WHERE is_deleted = 0');
+}
 
 ?>
 
@@ -11,24 +19,22 @@ $stmt = $pdo->query('SELECT * FROM books WHERE is_deleted = 0');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Book List</title>
 </head>
 <body>
 
-<form method="post" action="./search.php">
-    <input type="text" name="search" placeholder="Search for student">
-    <input type="submit" value="Otsi">
+<form method="post" action="">
+    <input type="text" name="search" placeholder="Search for a book" value="<?= htmlspecialchars($search); ?>">
+    <input type="submit" value="Search">
 </form>
 
 <ul>
-    <?php while ( $book = $stmt->fetch() ) { ?>
-        
+    <?php while ($book = $stmt->fetch()) { ?>
         <li>
             <a href="./book.php?id=<?= $book['id']; ?>">
-                <?= $book['title']; ?>
+                <?= htmlspecialchars($book['title']); ?>
             </a>
         </li>
-    
     <?php } ?>
 </ul>
 
